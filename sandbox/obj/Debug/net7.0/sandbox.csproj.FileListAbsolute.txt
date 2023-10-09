@@ -1,0 +1,14 @@
+D:\Repository\csharplearning\sandbox\bin\Debug\net7.0\sandbox.exe
+D:\Repository\csharplearning\sandbox\bin\Debug\net7.0\sandbox.deps.json
+D:\Repository\csharplearning\sandbox\bin\Debug\net7.0\sandbox.runtimeconfig.json
+D:\Repository\csharplearning\sandbox\bin\Debug\net7.0\sandbox.dll
+D:\Repository\csharplearning\sandbox\bin\Debug\net7.0\sandbox.pdb
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.AssemblyInfoInputs.cache
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.AssemblyInfo.cs
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.csproj.CoreCompileInputs.cache
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.dll
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\refint\sandbox.dll
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.pdb
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\sandbox.genruntimeconfig.cache
+D:\Repository\csharplearning\sandbox\obj\Debug\net7.0\ref\sandbox.dll
