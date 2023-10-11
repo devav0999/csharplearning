@@ -1,28 +1,59 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Net.Http.Headers;
+using System.Text;
+
 Console.Title = "adding two numbers";
 
-string first_number;
-string second_number;
+double firstNumber = 0, secondNumber = 0;
+bool corectType = false;
+
+//Input first number
+while (!corectType)
+{
+    try
+    {
+        Console.WriteLine("Input first number");
+
+        corectType = true;
+        firstNumber = double.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Wrong input data type, error: " + e.Message);
+        corectType = false;
+    }
+}
 
 
-Console.WriteLine("write first number");
-first_number = Console.ReadLine();
+//Input second number
+corectType = false;
 
-Console.WriteLine("write second number");
-second_number = Console.ReadLine();
+while (!corectType)
+{
+    try
+    {
+        Console.WriteLine("Input second number");
 
+        corectType = true;
+        secondNumber = double.Parse(Console.ReadLine());
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("Wrong input data type, error: " + e.Message);
+        corectType = false;
+    }
+}
 
+//Add numbers
 try
 {
-    Console.WriteLine("sum of numbers");
-    Console.WriteLine(Double.Parse(first_number) + Double.Parse(second_number));
-    
+    Console.WriteLine(firstNumber+secondNumber);
 }
-catch (FormatException e)
+catch (Exception e)
 {
-    Console.WriteLine(e.Message);
+    Console.WriteLine("Something goes wrong, error: " + e.Message);
 }
 
-
+// Close Console
 Console.WriteLine("Press enter to close...");
 Console.ReadLine();
