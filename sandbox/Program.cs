@@ -5,54 +5,45 @@ using System.Text;
 Console.Title = "adding two numbers";
 
 double firstNumber = 0, secondNumber = 0;
-bool corectType = false;
+
+void InputNumber(out double variable)
+{
+    bool corectType = false;
+    variable = 0;
+
+    while (!corectType)
+    {
+        try
+        {
+            Console.WriteLine("Input number");
+
+            corectType = true;
+            variable = double.Parse(Console.ReadLine());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Wrong input data type, error: " + e.Message);
+            corectType = false;
+        }
+    }
+}
 
 //Input first number
-while (!corectType)
-{
-    try
-    {
-        Console.WriteLine("Input first number");
-
-        corectType = true;
-        firstNumber = double.Parse(Console.ReadLine());
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Wrong input data type, error: " + e.Message);
-        corectType = false;
-    }
-}
-
+InputNumber(out firstNumber);
 
 //Input second number
-corectType = false;
-
-while (!corectType)
-{
-    try
-    {
-        Console.WriteLine("Input second number");
-
-        corectType = true;
-        secondNumber = double.Parse(Console.ReadLine());
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Wrong input data type, error: " + e.Message);
-        corectType = false;
-    }
-}
+InputNumber(out secondNumber);
 
 //Add numbers
 try
 {
-    Console.WriteLine(firstNumber+secondNumber);
+    Console.WriteLine(firstNumber + secondNumber);
 }
 catch (Exception e)
 {
     Console.WriteLine("Something goes wrong, error: " + e.Message);
 }
+
 
 // Close Console
 Console.WriteLine("Press enter to close...");
