@@ -1,43 +1,87 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Net.Http.Headers;
 using System.Text;
+using System.Collections;
+using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
+using System.Collections.ObjectModel;
+using System;
+using System.Diagnostics.Metrics;
 
-Console.Title = "adding two numbers";
+Console.Title = "simple calculator";
 
-double firstNumber = 0, secondNumber = 0;
+string arythmeticExpresion = string.Empty;
 
-void InputNumber(out double variable)
+Regex isArythmeticExpresion = new Regex(@"(((\d+\.\d+|\d+)[\/\*\+\-](\d+\.\d+|\d+))|([\/\*\+\-](\d+\.\d+|\d+)))+$");
+Regex isDigit = new Regex(@"\d+\.\d+|\d+");
+Regex isArythmeticSign = new Regex(@"[\/\*\+\-]");
+
+bool regexMatched = false;
+
+#region input value
+while (!regexMatched)
 {
-    bool corectType = false;
-    variable = 0;
-
-    while (!corectType)
+    try
     {
-        try
-        {
-            Console.WriteLine("Input number");
+        Console.WriteLine("Input arythmetic expresion");
+        arythmeticExpresion = Console.ReadLine();
+        MatchCollection matches = isArythmeticExpresion.Matches(arythmeticExpresion);
 
-            corectType = true;
-            variable = double.Parse(Console.ReadLine());
-        }
-        catch (Exception e)
+        if (matches.Count == 1)
+            regexMatched = true;
+    }
+    catch(Exception e)
+    {
+        Console.WriteLine("Something goes wrong, error: " + e.Message);
+    }
+}
+#endregion
+
+MatchCollection matchesDigit = isDigit.Matches(arythmeticExpresion);
+MatchCollection matchesArythmeticSign = isArythmeticSign.Matches(arythmeticExpresion);
+
+#region calculating 
+
+double outPut = double.Parse(matchesDigit.ElementAt(0).ToString());
+
+try
+{
+    for (int i = 1; i <= matchesArythmeticSign.Count(); i++)
+    {
+        switch (matchesArythmeticSign.ElementAt(i-1).ToString())
         {
-            Console.WriteLine("Wrong input data type, error: " + e.Message);
-            corectType = false;
+            case "+":
+                outPut += double.Parse(matchesDigit.ElementAt(i).ToString());
+                break;
+
+            case "-":
+                outPut -= double.Parse(matchesDigit.ElementAt(i).ToString());
+                break;
+
+            case "*":
+                outPut *= double.Parse(matchesDigit.ElementAt(i).ToString());
+                break;
+
+            case "/":
+                outPut /= double.Parse(matchesDigit.ElementAt(i).ToString());
+                break;
+
+            default:
+                Console.WriteLine("Oh no, imposible case");
+                break;
         }
     }
 }
+catch (Exception e)
+{
+    Console.WriteLine("Something goes wrong, error: " + e.Message);
+}
+#endregion
 
-//Input first number
-InputNumber(out firstNumber);
-
-//Input second number
-InputNumber(out secondNumber);
-
-//Add numbers
+//Write outPut
 try
 {
-    Console.WriteLine(firstNumber + secondNumber);
+    Console.WriteLine(outPut);
 }
 catch (Exception e)
 {
