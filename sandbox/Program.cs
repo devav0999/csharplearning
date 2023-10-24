@@ -46,24 +46,24 @@ double outPut = double.Parse(matchesDigit.ElementAt(0).ToString());
 
 try
 {
-    for (int i = 1; i <= matchesArythmeticSign.Count(); i++)
+    for (int i = 0; i < matchesArythmeticSign.Count(); i++)
     {
-        switch (matchesArythmeticSign.ElementAt(i-1).ToString())
+        switch (matchesArythmeticSign.ElementAt(i).ToString())
         {
             case "+":
-                outPut += double.Parse(matchesDigit.ElementAt(i).ToString());
+                outPut += double.Parse(matchesDigit.ElementAt(i + 1).ToString());
                 break;
 
             case "-":
-                outPut -= double.Parse(matchesDigit.ElementAt(i).ToString());
+                outPut -= double.Parse(matchesDigit.ElementAt(i + 1).ToString());
                 break;
 
             case "*":
-                outPut *= double.Parse(matchesDigit.ElementAt(i).ToString());
+                outPut *= double.Parse(matchesDigit.ElementAt(i + 1).ToString());
                 break;
 
             case "/":
-                outPut /= double.Parse(matchesDigit.ElementAt(i).ToString());
+                outPut /= double.Parse(matchesDigit.ElementAt(i + 1).ToString());
                 break;
 
             default:
