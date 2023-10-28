@@ -12,8 +12,8 @@ Console.Title = "simple calculator";
 
 string arythmeticExpresion = string.Empty;
 
-Regex isArythmeticExpresion = new Regex(@"(((\d+\.\d+|\d+)[\/\*\+\-](\d+\.\d+|\d+))|([\/\*\+\-](\d+\.\d+|\d+)))+$");
-Regex isDigit = new Regex(@"\d+\.\d+|\d+");
+Regex isArythmeticExpresion = new Regex(@"(((\d+[\.\,]\d+|\d+)[\/\*\+\-](\d+[\.\,]\d+|\d+))|([\/\*\+\-](\d+[\.\,]\d+|\d+)))+$");
+Regex isDigit = new Regex(@"\d+[\.\,]\d+|\d+");
 Regex isArythmeticSign = new Regex(@"[\/\*\+\-]");
 
 bool regexMatched = false;
