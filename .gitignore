@@ -5,3 +5,5 @@
 /.vs
 /sandbox/.vs/sandbox
 /sandbox/obj/Debug/net7.0
+/simpe calculator/obj
+/simpe calculator/bin/Debug/net6.0
