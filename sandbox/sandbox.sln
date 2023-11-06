@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "sandbox", "sandbox.csproj", "{821434E7-C8AB-41E0-81DE-6ABB10832792}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "simpe calculator", "..\simpe calculator\simpe calculator.csproj", "{F39F2435-90BC-43D2-9E6D-40EDE1AC0F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "simple calculator", "..\simpe calculator\simple calculator.csproj", "{F39F2435-90BC-43D2-9E6D-40EDE1AC0F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
