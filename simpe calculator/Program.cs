@@ -1,133 +1,98 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.Collections;
-
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using System.Runtime;
 
 Console.Title = "simple calculator";
 
-string arythmeticExpresion = string.Empty;
-string stringOfarythmeticSigns = string.Empty;
-Stack stakOfDigits = new Stack();
+string trimedArythmeticExpresion = string.Empty;
 
-bool correctExpresion = false;
-
-/// <summary>Gets char character and array of char set.</summary>
-/// <returns> Return true if char character is in array of char set.</returns>
-bool IsInSet(char character, char[] set)
+/// <summary>Return first finding number in arythmetic expresion</summary>
+/// <param name="s">The string which has arithmetic sign.</param>
+/// <returns>Returns number  whitch is in string s bfore arythmetic sign or in its end </returns>
+double RetrunFirstNumberFromString(string s) 
 {
-    try
-    {
-        foreach (char cha in set)
-        {
-            if (character == cha)
-                return true;
-        }
-    }
-    catch (Exception e)
-    {
-        Console.Error.WriteLine("An error has occured" + e);
-    }
-    return false;
-}
+    int[] tebleOfMachedIndex = new int[4];
+    tebleOfMachedIndex[0] = s.IndexOf('-');
+    tebleOfMachedIndex[1] = s.IndexOf('+');
+    tebleOfMachedIndex[2] = s.IndexOf('*');
+    tebleOfMachedIndex[3] = s.IndexOf('/');
 
-/// <summary>Gets string.</summary>
-/// <returns>Reversed input string.</returns>
-string Reverse(string s)
-{
-    char[] charArray = s.ToCharArray();
-    Array.Reverse(charArray);
-    return new string(charArray);
-}
+    int minIndex = int.MaxValue;
 
+    // if there is not any sign
+    if (tebleOfMachedIndex[0] == tebleOfMachedIndex[1] && tebleOfMachedIndex[2] == tebleOfMachedIndex[3])
+        return double.Parse(s);
+    
+    // smalest index from finded sign or signs
+    foreach (int index in tebleOfMachedIndex)
+    { 
+        if(index != -1 && minIndex > index)
+            minIndex = index;
+    }
+    return double.Parse(s.Substring(0, minIndex));
+}
 
 #region input value
 
-while (!correctExpresion)
+try
 {
-    try
-    {
-        Console.WriteLine("Input arythmetic expresion - check correct input values before enter");
-        arythmeticExpresion = Console.ReadLine();
-        arythmeticExpresion.Trim();
-        char[] setOfDigits = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ',' };
-        char[] setOfArythmeticSigns = { '-', '+', '/', '*'};
+    Console.WriteLine("Input arythmetic expresion - check correct input values before enter");
+    string arythmeticExpresion = Console.ReadLine();
+    trimedArythmeticExpresion = new string(arythmeticExpresion.Where(a => a == '-' || 
+                                                            a == '+' || 
+                                                            a == '/' || 
+                                                            a == '*' || 
+                                                            a == '1' || 
+                                                            a == '2' || 
+                                                            a == '3' || 
+                                                            a == '4' || 
+                                                            a == '5' || 
+                                                            a == '6' || 
+                                                            a == '7' || 
+                                                            a == '8' || 
+                                                            a == '9' || 
+                                                            a == '0' || 
+                                                            a == ',').ToArray());
 
-
-        foreach (char element in arythmeticExpresion) 
-        {
-            if (!IsInSet(element, setOfDigits) && !IsInSet(element, setOfArythmeticSigns))
-                throw new Exception("Input string contains incorrect sign");
-        }
-        correctExpresion = true;
-
-        string temp = string.Empty;
-
-        for ( int i = arythmeticExpresion.Length - 1 ; i > -1; i--)
-        {
-            if (int.TryParse(arythmeticExpresion[i].ToString(), out int result))
-            {
-                temp += arythmeticExpresion[i];
-
-                if (i == 0) 
-                {
-                    stakOfDigits.Push(Reverse(temp));
-                    temp = string.Empty;
-                }
-            }
-
-            if (arythmeticExpresion[i] == ',' && temp.IndexOf(',') == -1)
-                temp += arythmeticExpresion[i];
-
-            if (arythmeticExpresion[i] == '-' || arythmeticExpresion[i] == '+' || arythmeticExpresion[i] == '/' || arythmeticExpresion[i] == '*')
-            {
-                stakOfDigits.Push(Reverse(temp));
-                temp = string.Empty;
-                stringOfarythmeticSigns += arythmeticExpresion[i];
-            }
-        }
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("Something goes wrong, error: " + e.Message);
-    }
 }
+catch(Exception e)
+{
+    Console.Error.WriteLine("Input proces error - message: " + e);
+}
+
 #endregion
 
 #region calculating 
 
-double outPut = outPut = double.Parse(stakOfDigits.Pop().ToString());
+double outPut = RetrunFirstNumberFromString(trimedArythmeticExpresion);
 
 try
 {
-    for (int i = stringOfarythmeticSigns.Length - 1; i > - 1; i--)
+    for (int i = 0; i < trimedArythmeticExpresion.Length; i++)
     {
-        switch (stringOfarythmeticSigns.ElementAt(i))
+        if (trimedArythmeticExpresion.ElementAt(i) is '-')
         {
-            case '+':
-                outPut += double.Parse(stakOfDigits.Pop().ToString());
-                break;
-
-            case '-':
-                outPut -= double.Parse(stakOfDigits.Pop().ToString());
-                break;
-
-            case '*':
-                outPut *= double.Parse(stakOfDigits.Pop().ToString());
-                break;
-
-            case '/':
-                outPut /= double.Parse(stakOfDigits.Pop().ToString());
-                break;
-
-            default:
-                Console.WriteLine("Oh no, imposible case");
-                break;
+            outPut -= RetrunFirstNumberFromString(trimedArythmeticExpresion. Substring(i + 1));
+        }
+        if (trimedArythmeticExpresion.ElementAt(i) is '+')
+        {
+            outPut += RetrunFirstNumberFromString(trimedArythmeticExpresion.Substring(i + 1));
+        }
+        if (trimedArythmeticExpresion.ElementAt(i) is '*')
+        {
+            outPut *= RetrunFirstNumberFromString(trimedArythmeticExpresion.Substring(i + 1));
+        }
+        if (trimedArythmeticExpresion.ElementAt(i) is '/')
+        {
+            outPut /= RetrunFirstNumberFromString(trimedArythmeticExpresion.Substring(i + 1));
         }
     }
 }
 catch (Exception e)
 {
-    Console.WriteLine("Something goes wrong, error: " + e.Message);
+    Console.WriteLine("Calculating proces error - message: " + e);
 }
 #endregion
 
