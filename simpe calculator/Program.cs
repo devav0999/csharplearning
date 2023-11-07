@@ -1,8 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Runtime;
 
 Console.Title = "simple calculator";
 
@@ -40,20 +37,11 @@ try
 {
     Console.WriteLine("Input arythmetic expresion - check correct input values before enter");
     string arythmeticExpresion = Console.ReadLine();
-    trimedArythmeticExpresion = new string(arythmeticExpresion.Where(a => a == '-' || 
+    trimedArythmeticExpresion = new string(arythmeticExpresion.Where(a => char.IsDigit(a) ||
+                                                            a == '-' || 
                                                             a == '+' || 
                                                             a == '/' || 
-                                                            a == '*' || 
-                                                            a == '1' || 
-                                                            a == '2' || 
-                                                            a == '3' || 
-                                                            a == '4' || 
-                                                            a == '5' || 
-                                                            a == '6' || 
-                                                            a == '7' || 
-                                                            a == '8' || 
-                                                            a == '9' || 
-                                                            a == '0' || 
+                                                            a == '*' ||
                                                             a == ',').ToArray());
 
 }
